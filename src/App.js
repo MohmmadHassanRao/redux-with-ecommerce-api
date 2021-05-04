@@ -1,4 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
+import Header from "./components/Header";
 import ProductsList from "./components/ProductsList";
 
 function App() {
@@ -10,6 +11,7 @@ function App() {
 
   return (
     <div className="App">
+      <Header />
       <h1>Hello world</h1>
       <p>{counter}</p>
       <button

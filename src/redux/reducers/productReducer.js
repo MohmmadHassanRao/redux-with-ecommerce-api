@@ -1,14 +1,8 @@
 import { ActionTypes } from "../constants/ActionTypes";
 
 const initialState = {
-  products: [
-    {
-      id: 1,
-      title: "Hassan",
-      skills: "react",
-    },
-  ],
-  items: [],
+  products: [],
+
   counter: 0,
 };
 
@@ -16,7 +10,7 @@ export const productReducer = (state = initialState, { type, payload }) => {
   //ismay second parameter action hota hai.idhr type aur payload ko de structure kya h jo product actions se arha h
   switch (type) {
     case ActionTypes.SET_PRODUCTS:
-      return { ...state, items: payload };
+      return { ...state, products: payload };
 
     default:
       return state;
