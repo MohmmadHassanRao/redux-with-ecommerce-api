@@ -1,8 +1,13 @@
 import { combineReducers } from "redux";
-import { counterReducer, productReducer } from "./productReducer";
+import {
+  counterReducer,
+  productReducer,
+  selectedProductReducer,
+} from "./productReducer";
 
 const reducers = combineReducers({
   allProducts: productReducer,
+  product: selectedProductReducer,
   counters: counterReducer,
 });
 

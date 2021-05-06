@@ -4,19 +4,58 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setProducts } from "../redux/actions/productAction";
 import { makeStyles } from "@material-ui/core/styles";
+import Card from "@material-ui/core/Card";
+import CardActions from "@material-ui/core/CardActions";
+import CardContent from "@material-ui/core/CardContent";
+import Button from "@material-ui/core/Button";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: 100,
   },
-  card: {
-    padding: "30px 20px",
-    backgroundColor: "#F7F6F6",
-    boxShadow: " -1px 7px 9px -9px rgba(0,0,0,0.75)",
-    border: "1px solid black",
+  container: {
+    display: "flex",
+    justifyContent: "center",
+    flexWrap: "wrap",
+  },
+  cardContainer: {
+    padding: 15,
     margin: 10,
     display: "flex",
     flexDirection: "column",
+  },
+  card: {
+    padding: 10,
+    height: "400px",
+  },
+  cardImage: {
+    display: "flex",
+    justifyContent: "center",
+    flexDirection: "column",
+    alignItems: "center",
+  },
+
+  title: {
+    fontSize: 20,
+    fontWeight: "bold",
+    width: "250px",
+    overflow: "hidden",
+    whiteSpace: "nowrap",
+    textOverflow: "ellipsis",
+    margin: 10,
+  },
+  cardContent: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+    height: "100px",
+    marginTop: "10px",
+  },
+
+  btn: {
+    marginTop: "10px",
   },
 }));
 
@@ -41,14 +80,39 @@ const ProductsList = () => {
   }, [dispatch]);
 
   const renderProducts = products.map((product, i) => {
-    const { category, image, price, title } = product;
+    const { id, category, image, price, title } = product;
     return (
-      <Grid sm={12} lg={3} className={classes.card} key={i}>
-        <Typography>{title}</Typography>
+      <Grid
+        xs={12}
+        sm={12}
+        lg={3}
+        md={5}
+        className={classes.cardContainer}
+        key={i}
+      >
+        <Link to={`/product/${id}`} style={{ textDecoration: "none" }}>
+          <Card className={classes.card}>
+            <div className={classes.cardImage}>
+              <img src={image} alt={title} height={200} width={180} />
+            </div>
+            <CardContent className={classes.cardContent}>
+              <Typography align="center" className={classes.title}>
+                {title}
+              </Typography>
+              <Typography>{category}</Typography>
+              <Typography style={{ fontWeight: "bold" }}>${price}</Typography>
+            </CardContent>
+            <CardActions className={classes.btn}>
+              <Button size="small" color="primary" variant="contained">
+                Buy Now
+              </Button>
+            </CardActions>
+          </Card>
+        </Link>
       </Grid>
     );
   });
-  return <>{renderProducts}</>;
+  return <div className={classes.container}>{renderProducts}</div>;
 };
 
 export default ProductsList;
